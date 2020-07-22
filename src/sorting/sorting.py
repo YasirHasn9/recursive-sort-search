@@ -2,31 +2,63 @@
 def merge(arrA, arrB):
     elements = len(arrA) + len(arrB)
     merged_arr = [0] * elements
-    index_left = index_right = 0
-    for _ in range(elements):
-        if index_left < len(arrA) and index_right < len(arrB):
-            if arrA[index_left] <= arrB[index_right]:
-                merged_arr.append(arrA[index_left])
-                index_left += 1
-            else:
-                merged_arr.append(arrB[index_right])
-                index_right += 1
+    # i = j = k = 0 
+    # for _ in range(0, len(merged_arr)):
+    #     if i < len(arrA) and j < len(arrB):
+    #         if arrA[i] < arrB[j]:
+    #             merged_arr[k] == arrA[i]
+    #             i =+ 1
+    #         else:
+    #             merged_arr[k] == arrB[j]
+    #             j += 1
+    #         k += 1
+    #     elif i < len(arrA):
+    #          merged_arr[k] == arrB[j]
+    #          j += 1
+    #          k += 1
+    #     elif j < len(arrB):
+    #          merged_arr[k] == arrA[i]
+    #          i += 1
+    #          k += 1
 
-        elif index_left == len(arrA):
-            merged_arr.append(arrB[index_right])
-            index_right += 1
-        elif right_index == len(arrB):
-             merged_arr.append(arrA[index_left])
-             index_left += 1
+            
+
+
+
     # Your code here
+    left_index = right_index = sorted_index = 0
+    while left_index < len(arrA) and right_index < len(arrB):
+        # check the first element in each list
+        if arrA[left_index] < arrB[right_index]:
+            # make the sorted index == correct one
+            merged_arr[sorted_index] = arrA[left_index]
+            left_index += 1
+        else:
+            merged_arr[sorted_index] = arrB[right_index]
+            right_index += 1
+        sorted_index += 1
 
+    while left_index < len(arrA):
+        merged_arr[sorted_index] = arrA[left_index]
+        left_index += 1
+        sorted_index += 1
+
+    while right_index < len(arrB):
+        merged_arr[sorted_index] = arrB[right_index]
+        right_index += 1
+        sorted_index += 1
 
     return merged_arr
 
 # TO-DO: implement the Merge Sort function below recursively
 def merge_sort(arr):
     # Your code here
-    
+    if len(arr) > 1:
+        middle = len(arr)//2
+        LHS = merge_sort(arr[:middle])
+        RHS = merge_sort(arr[middle:])
+
+        arr = merge(LHS, RHS)
 
     return arr
 
@@ -36,8 +68,10 @@ def merge_sort(arr):
 # or data structures; it can only re-use the memory it was given as input
 def merge_in_place(arr, start, mid, end):
     # Your code here
+    pass
 
 
 def merge_sort_in_place(arr, l, r):
     # Your code here
+    pass
 
